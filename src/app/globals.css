@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Removed body font-family declaration to rely on Tailwind's default font-sans from layout.tsx */
+
+@layer base {
+  :root {
+    --background: 208 100% 97%; /* #F0F8FF - Alice Blue */
+    --foreground: 210 25% 25%; /* Dark Grayish Blue */
+
+    --muted: 208 50% 93%; /* Lighter muted for #F0F8FF background */
+    --muted-foreground: 210 25% 45%; /* Darker muted foreground */
+
+    --popover: 0 0% 100%; /* White popover */
+    --popover-foreground: 210 25% 25%;
+
+    --card: 0 0% 100%; /* White card */
+    --card-foreground: 210 25% 25%;
+
+    --border: 208 30% 88%; /* Light blue-gray border */
+    --input: 208 30% 88%; /* Light blue-gray input */
+
+    --primary: 212 71% 60%; /* #4A90E2 - EduPilot Blue */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 208 60% 90%; /* Lighter blue for secondary elements */
+    --secondary-foreground: 212 71% 40%; /* Darker EduPilot Blue */
+
+    --accent: 39 100% 50%; /* #FFA500 - EduPilot Orange */
+    --accent-foreground: 39 100% 10%; /* Dark Orange/Brown */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 212 71% 60%; /* EduPilot Blue for rings */
+
+    --radius: 0.5rem;
+
+    /* Sidebar specific theme variables from ui/sidebar.tsx */
+    /* Assuming light theme for sidebar based on main background */
+    --sidebar-background: 208 100% 98%; /* Slightly off-white blue, cleaner than default */
+    --sidebar-foreground: 210 25% 26.1%;
+    --sidebar-primary: 212 71% 60%; /* EduPilot Blue */
+    --sidebar-primary-foreground: 0 0% 100%; /* White */
+    --sidebar-accent: 208 100% 94%; /* Lighter version of background for hover */
+    --sidebar-accent-foreground: 212 71% 50%; /* Primary for active/hover text */
+    --sidebar-border: 208 30% 85%;
+    --sidebar-ring: 212 71% 60%; /* EduPilot Blue */
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    /* Keeping dark mode defaults, can be customized if needed */
+    --background: 210 25% 10%;
+    --foreground: 208 100% 97%;
+
+    --muted: 210 25% 15%;
+    --muted-foreground: 208 100% 80%;
+
+    --popover: 210 25% 5%;
+    --popover-foreground: 208 100% 97%;
+
+    --card: 210 25% 5%;
+    --card-foreground: 208 100% 97%;
+
+    --border: 210 25% 20%;
+    --input: 210 25% 20%;
+
+    --primary: 212 71% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 25% 25%;
+    --secondary-foreground: 208 100% 97%;
+
+    --accent: 39 100% 50%;
+    --accent-foreground: 39 100% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 212 71% 60%;
+
+    /* Sidebar specific theme variables for dark mode */
+    --sidebar-background: 210 25% 12%;
+    --sidebar-foreground: 208 100% 95%;
+    --sidebar-primary: 212 71% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 25% 20%;
+    --sidebar-accent-foreground: 212 71% 70%;
+    --sidebar-border: 210 25% 25%;
+    --sidebar-ring: 212 71% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 3D Flashcard styles */
+.flashcard-container {
+  perspective: 1000px;
+}
+
+.flashcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flashcard.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem; /* p-6 */
+  border-radius: var(--radius); /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+}
+
+.flashcard-front {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+}
+
+.flashcard-back {
+  background-color: hsl(var(--secondary)); /* Slightly different background for back */
+  color: hsl(var(--secondary-foreground));
+  transform: rotateY(180deg);
+}
